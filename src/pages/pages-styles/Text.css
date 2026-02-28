@@ -1,0 +1,70 @@
+.chat-container {
+  width:100%;
+  margin: 0 auto;
+  z-index: 1;
+}
+.profile-pic{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: aqua;
+    z-index: 4;
+    left: 43.5%;
+    margin-top: 20px;
+    position: relative;
+}
+.return{
+    margin-top: 20px;
+    position: absolute;
+    background-color: #c267f3;
+    z-index: 1;
+}
+.contact {
+  text-align: center;
+  font-size: 28px;
+  z-index: 1;
+}
+
+.chat-log {
+  border-radius: 15px;
+  height: 400px;
+  padding: 10px;
+  overflow-y: scroll;
+  margin-bottom: 10px;
+  background-color: #f9f9f914;
+  z-index: 1;
+}
+
+.chat-message {
+  margin: 5px 0;
+  color: rgb(255, 255, 255);
+  z-index: 1;
+}
+
+.chat-input {
+  width: 85%;
+  padding: 5px;
+  border: none;
+  border-radius: 15px;
+  background-color: #f9f9f923;
+  z-index: 1;
+  margin-left: 5px
+}
+
+.chat-button {
+  width: 8%;
+  height: 15%;
+  padding: 5px;
+  margin-left: 2%;
+  cursor: pointer;
+  background-color: #c267f3;
+  z-index: 1;
+  color: white;
+  border: none;
+  border-radius: 50px;
+}
+
+.chat-button:hover {
+  background-color: #a74ed6;
+   z-index: 1;
+}

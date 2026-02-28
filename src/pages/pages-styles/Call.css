@@ -1,0 +1,131 @@
+html, body, #root {
+  height: 100%;
+  width:100%;
+  margin: 0;
+  padding: 0;
+  background-color: #360060;
+}
+.callContainer{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(2,45vw);
+    grid-template-rows: auto auto auto;
+    gap: 5px;
+    box-sizing: border-box;
+    outline: 1px solid white;
+    background-image: linear-gradient(to top, #30174a, #360060);
+}
+.end-call {
+    position: relative;
+    width: 40%;
+    height: 40%;
+    top: 200%;
+    left:90%;
+    background-image: url("/call.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 75px 75px;
+    background-color:#30174a;
+    z-index: 2;
+}
+.mute-call {
+    position: relative;
+    width: 40%;
+    height: 40%;
+    top: 200%;
+    left:30%;
+    background-image: url("/mute.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 75px 75px;
+    background-color:#30174a;
+    z-index: 2;
+}
+.speaker{
+    position: relative;
+    width: 40%;
+    height: 40%;
+    top: 100%;
+    left:46%;
+    background-image: url("/speaker.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 75px 75px;
+    background-color:#30174a;
+    z-index: 2;
+}
+.caller{
+    position: absolute;
+    width: 150%;
+    height: 40%;
+    top: 10%;
+    left:18%;
+    font-family: "Futura", "Century Gothic", "Arial", sans-serif;
+    font-size: 48px;
+    color: #ffaee1;
+    text-shadow: 
+    0 0 5px #ffaee1,
+    0 0 10px #ff32b4,
+    0 0 20px #ffaee1;
+}
+.caller-name{
+    position: absolute;
+    width: 90%;
+    height: 40%;
+    top: 20%;
+    left:30%;
+    color:#ffaee1;
+    font-family: "Futura", "Century Gothic", "Arial", sans-serif;
+    font-size:24px;
+    text-shadow: 
+    0 0 5px #ffaee1,
+    0 0 10px #ff32b4,
+    0 0 20px #ffaee1;
+}
+.star{
+    position: absolute;
+    background: #FFFFFF;
+    animation: twinkle 2s infinite ease-in-out;
+    border-radius: 50%;
+    box-shadow: 0 0 5px #FFFFFF;
+}
+@keyframes twinkle{
+    0%,100% {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1.4);
+        opacity:1;
+    }
+}
+.prediction{
+    position: absolute;
+    width: 90%;
+    height: 40%;
+    top: 30%;
+    left:40%;
+    color:#ffaee1;
+    font-family: "Futura", "Century Gothic", "Arial", sans-serif;
+    font-size:20px;
+    text-shadow: 
+    0 0 5px #ffaee1,
+    0 0 10px #ff32b4,
+    0 0 20px #ffaee1;
+}
+.confidence{
+    position: absolute;
+    width: 90%;
+    height: 40%;
+    top: 35%;
+    left:47%;
+    color:#ffaee1;
+    font-family: "Futura", "Century Gothic", "Arial", sans-serif;
+    font-size:20px;
+    text-shadow: 
+    0 0 5px #ffaee1,
+    0 0 10px #ff32b4,
+    0 0 20px #ffaee1;
+}

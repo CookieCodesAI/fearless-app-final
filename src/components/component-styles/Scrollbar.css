@@ -16,13 +16,13 @@
     width: 100px;
     height: 30px;
     border-radius: 10px;
-    background-color: #7e79bb;
+    background-color: #996bff;
     flex-shrink: 0;
     text-align: center;
 }
 .shortcuts{
     position:absolute;
-    top:7%;
+    top:5%;
     left:4%;
     font-size: 20px;
 }

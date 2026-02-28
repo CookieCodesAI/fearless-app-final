@@ -4,12 +4,10 @@ import Scrollbar from './components/Scrollbar.jsx'
 import ButtonPanel from './components/ButtonPanel.jsx'
 import Call from "./pages/Call.jsx"
 import Text from "./pages/Text.jsx"
-import LiveStream from "./pages/LiveStream.jsx"
-import Location from "./pages/Location.jsx"
 import {Routes, Route} from 'react-router-dom'
+import LiveStream from "./pages/LiveStream.jsx"
 
 function App() { 
-
   return ( 
     <Routes>
       <Route path="/" element={

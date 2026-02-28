@@ -1,8 +1,6 @@
 .container-panel{
     width: 100%;
     height: 100%;
-    border: 1px solid white;
-    border-style: solid;
     display: grid;
     grid-template-columns: repeat(2,45vw);
     grid-template-rows: auto auto auto;
@@ -16,7 +14,7 @@
     left: 5%;
     width: 450px;
     height: 200px;
-    background-color: #f782a2;
+    background-color: #f93ba2;
     border-radius: 10px;
     flex-shrink: 0;
     gap: 5px;
@@ -30,7 +28,7 @@
 .small-call{
     width: 220px;
     height: 150px;
-    background-color: #7e79bb;
+    background-color: #996bff;
     border-radius: 10px;
     flex-shrink: 0;
     display: flex;
@@ -43,7 +41,7 @@
 .text{
     width: 220px;
     height: 150px;
-    background-color: #f782a2;
+    background-color: #f93ba2;
     border-radius: 10px;
     flex-shrink: 0;
     gap: 5px;
@@ -57,7 +55,7 @@
 .location{
     width: 220px;
     height: 150px;
-    background-color: #f782a2;
+    background-color: #f93ba2;
     border-radius: 10px;
     flex-shrink: 0;
     display: flex;
@@ -70,7 +68,7 @@
 .live-stream{
     width: 220px;
     height: 150px;
-    background-color: #7e79bb;
+    background-color: #996bff;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
