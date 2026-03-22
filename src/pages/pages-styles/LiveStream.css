@@ -13,6 +13,7 @@
     width: 100%;
     height: 100%;
     display: block; 
+    top:-10%;
     z-index: 2;
 }
 .webcam{
@@ -24,15 +25,17 @@
 }
 .end-live{
     z-index: 3;
-    border:white solid 2px;
     position: absolute;
-    top:85%;
-    background-color: hsl(301, 100%, 78%);
+    top:80%;
+    background-color: #996bff;
     font-size: 20px;
     text-align: top;
     text-wrap: nowrap;
     width: 200px;
     height:40px;
     border-radius:10px;
+    color:white;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight:600;
 
 }

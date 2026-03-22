@@ -6,12 +6,12 @@ export default function ProfilePic(){
     const [open, setOpen] = useState(false);
     return(
         <div className = "settings">
-            <button className="profilePic" onClick = {() => {setOpen(!open)}}/>
+            <button className="profilePic" onClick = {() => {setOpen(!open)}}></button>
                 {open &&(
                     <div className = "options">
-                        <div>Options</div>
-                        <div>Activity</div>
-                        <div>Account Info</div>
+                        <button className = "op">Options</button>
+                        <button className = "activity">Activity</button>
+                        <button className = "accinfo">Account Info</button>
                     </div>
                 )}
         </div>

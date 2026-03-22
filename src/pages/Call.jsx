@@ -7,6 +7,7 @@ export default function Call(){
     const [prediction, setPrediction] = useState("");
     const [confidence, setConfidence] = useState(0);
     const [recording, setRecording] = useState(false);
+    const [status, setStatus] = useState("");
 
     const [recorder, setRecorder] = useState(null);
     const [stream, setStream] = useState(null);
@@ -28,7 +29,7 @@ export default function Call(){
             formData.append("chunk", current);
 
             try {
-                const res = await fetch("http://localhost:8080/predict", {
+                const res = await fetch("http://192.168.86.47:8000/predict", {
                     method: "POST",
                     body: formData,
                     mode: "cors",
@@ -70,6 +71,29 @@ export default function Call(){
         console.error("Microphone error:", err);
         }
     };
+    const fetchTestFile = async () => {
+        try {
+            const res = await fetch("http://127.0.0.1:8000/test_file");
+            const data = await res.json();
+
+            for (let i = 0; i < data.length; i++) {
+                const chunk = data[i];
+                setPrediction(chunk.prediction);
+                setConfidence(chunk.confidence);
+                console.log(chunk.prediction, chunk.confidence, chunk.status);
+                if (chunk.status == "SOS DETECTED SENDING HELP"){
+                    setStatus(chunk.status); 
+                    break;
+                }
+                else{
+                    setStatus("");
+                }
+                await new Promise(res => setTimeout(res, 500)); 
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    };
 
     const handleStop = () => {
         if (recorder) recorder.stop();
@@ -98,15 +122,16 @@ export default function Call(){
             <div className="callContainer">
                 {stars}
                 <div className ="caller">572-299-2934</div>
-                <div className = "caller-name">Insert name here</div>
+                <div className = "caller-name">Krish</div>
                 <button className="end-call" onClick={()=>{
                     navigate('/');
                     handleStop();
                 }}>.</button>
                 <button className="mute-call">.</button>
-                <button className="speaker" onClick={handleStart}>.</button>
-                <div className = "prediction">{prediction}</div>
-                <div className = "confidence">{Number(confidence).toFixed(2)}</div>
+                <button className="speaker" onClick={fetchTestFile}>.</button>
+                <div className = "prediction">Prediction: {prediction}</div>
+                <div className = "confidence">Confidence: {Number(confidence).toFixed(2)}</div>
+                <div className="status">{status}</div>
             </div>
         </div>
     )

@@ -1,30 +1,26 @@
-
-.location-page {
-  height: 100vh;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-.map-container {
-  height: 100%;
-  width: 100%;
+html, body, #root, .location-page, .map-container, .leaflet-container {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  overflow: hidden;
+    overflow: hidden;
 }
+
 .leaflet-routing-container {
-  color: black !important;
+    background: white !important;
+    color: black !important;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 600;
 }
 
 .leaflet-routing-container h2,
 .leaflet-routing-container h3,
 .leaflet-routing-container span,
 .leaflet-routing-container div {
-  color: black !important;
-}
-
-.leaflet-routing-container {
-  background: white !important;
+    color: black !important;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 600;
 }

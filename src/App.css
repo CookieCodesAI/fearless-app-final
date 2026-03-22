@@ -2,8 +2,6 @@
   box-sizing: border-box;
 }
 #root, html, body{
-  margin: 0 auto;
-  padding: auto;
   overflow: hidden;
   height:100%;
   width:100%;
@@ -14,7 +12,6 @@
   aspect-ratio: 2 / 1; 
   width: min(100vw, 100vh * 2);
   height: auto;
-  border: 1px solid white;
-  border-style: dashed;
-  background-color: #30174a;
+  margin: 0;
+  background-color:#360060;
 }

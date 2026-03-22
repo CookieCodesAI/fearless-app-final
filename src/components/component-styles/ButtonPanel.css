@@ -4,16 +4,17 @@
     display: grid;
     grid-template-columns: repeat(2,45vw);
     grid-template-rows: auto auto auto;
-    gap: 5px;
-    padding-left: 23px;
+    gap: 8px;
+    padding-left: 15px;
+    top:40%;
     padding-top:10px;
     box-sizing: border-box;
 }
 .big-call{
     position: relative;
-    left: 5%;
-    width: 450px;
-    height: 200px;
+    left: 4%;
+    width: 370px;
+    height: 230px;
     background-color: #f93ba2;
     border-radius: 10px;
     flex-shrink: 0;
@@ -24,10 +25,12 @@
     padding: 10px;
     align-items: flex-start;       
     box-sizing: border-box;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight:600;
 }
 .small-call{
-    width: 220px;
-    height: 150px;
+    width: 180px;
+    height: 170px;
     background-color: #996bff;
     border-radius: 10px;
     flex-shrink: 0;
@@ -37,10 +40,12 @@
     padding: 10px;
     align-items: flex-start;       
     box-sizing: border-box;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight:600;
 }
 .text{
-    width: 220px;
-    height: 150px;
+    width: 180px;
+    height: 170px;
     background-color: #f93ba2;
     border-radius: 10px;
     flex-shrink: 0;
@@ -51,10 +56,12 @@
     padding: 10px;
     align-items: flex-start;       
     box-sizing: border-box;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight:600;
 }
 .location{
-    width: 220px;
-    height: 150px;
+    width: 180px;
+    height: 170px;
     background-color: #f93ba2;
     border-radius: 10px;
     flex-shrink: 0;
@@ -64,10 +71,12 @@
     padding: 10px;
     align-items: flex-start;       
     box-sizing: border-box;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight:600;
 }
 .live-stream{
-    width: 220px;
-    height: 150px;
+    width: 180px;
+    height: 170px;
     background-color: #996bff;
     border-radius: 10px;
     display: flex;
@@ -76,21 +85,28 @@
     padding: 10px;
     align-items: flex-start;       
     box-sizing: border-box;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight:600;
 }
 .small-text{
-    font-size: 12px;
+    font-size: 15px;
+    color:white;
 }
 .medium-text{
-    font-size: 36px;
+    font-size: 30px;
     text-wrap:nowrap;
+    color:white;
 }
 .big-text{
     font-size: 64px;
+    color:white;
 }
 .bottom-small-text{
-    font-size: 12px;
+    font-size: 14px;
     text-wrap:nowrap;
+    color:white;
 }
 .regular-text {
-    font-size: 36px;
+    font-size: 28px;
+    color:white;
 }

@@ -2,7 +2,7 @@
     position: relative;
     display: inline-block;
     top: 3%;
-    left: 90%;
+    left: 80%;
     height:50px;
     width:50px;
     border-radius: 50%;
@@ -10,8 +10,36 @@
     border:none;
 }
 .options{
-    position:absolute;
+    position:relative;
     background-color: #000000;
-    left: 90%;
+    left: 50%;
+    top: 0%;
     border-radius: 10px;
+    font-size: 12px;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight:600;
+    color: white;
+    height:15%;
+    
+}
+.op{
+    position: relative;
+    background-color: black;
+    color: white;
+    width:30px;
+    height: 10px;
+}
+.activity{
+    position: relative;
+    background-color: black;
+    color: white;
+    width:70px;
+    height: 10px;
+}
+.accinfo{
+    position: relative;
+    background-color: black;
+    color: white;
+    width:70px;
+    height: 10px;
 }

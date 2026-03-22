@@ -135,14 +135,9 @@ function useCurrentLocation() {
             return;
         }
         navigator.geolocation.getCurrentPosition(
-            (pos) => {
-                setLocation({
-                    lat: pos.coords.latitude,
-                    lng: pos.coords.longitude,
-                });
-            },
-            (err) => console.error(err),
-            {enableHighAccuracy: true, timeout: 1000, maximumAge:0}
+            (pos) => setLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
+            (err) => console.error("Geolocation error:", err),
+            { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
         );
         
         const watchID = navigator.geolocation.watchPosition(
@@ -162,7 +157,58 @@ function useCurrentLocation() {
 
     return location;
 }
+//Uncomment the below code for XCode
+/*function useCurrentLocation() {
+    const [location, setLocation] = useState(null);
 
+    useEffect(() => {
+        let intervalId;
+
+        const checkNativeLocation = () => {
+            if (window.currentLocation) {
+                setLocation({
+                    lat: window.currentLocation.latitude,
+                    lng: window.currentLocation.longitude,
+                    accuracy: window.currentLocation.accuracy,
+                });
+                console.log("Using native location:", window.currentLocation);
+                clearInterval(intervalId);
+            }
+        };
+
+        intervalId = setInterval(checkNativeLocation, 100);
+
+
+        if (!navigator.geolocation) {
+            alert("Geolocation not supported by this browser.");
+            return;
+        }
+
+        const geoSuccess = (pos) => {
+            setLocation({
+                lat: pos.coords.latitude,
+                lng: pos.coords.longitude,
+                accuracy: pos.coords.accuracy,
+            });
+            console.log("Using browser geolocation:", pos.coords);
+        };
+
+        const geoError = (err) => console.error("Geolocation error:", err);
+
+        const watchId = navigator.geolocation.watchPosition(geoSuccess, geoError, {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0,
+        });
+
+        return () => {
+            clearInterval(intervalId);
+            navigator.geolocation.clearWatch(watchId);
+        };
+    }, []);
+
+    return location;
+}*/
 function RecenterMap({ position}) {
     const map = useMap();
     const [hasCentered, setHasCentered] = useState(false);

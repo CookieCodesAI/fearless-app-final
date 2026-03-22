@@ -61,8 +61,9 @@ html, body, #root {
     width: 150%;
     height: 40%;
     top: 10%;
-    left:18%;
-    font-family: "Futura", "Century Gothic", "Arial", sans-serif;
+    left:12%;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight:600;
     font-size: 48px;
     color: #ffaee1;
     text-shadow: 
@@ -75,9 +76,10 @@ html, body, #root {
     width: 90%;
     height: 40%;
     top: 20%;
-    left:30%;
+    left:43%;
     color:#ffaee1;
-    font-family: "Futura", "Century Gothic", "Arial", sans-serif;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight:600;
     font-size:24px;
     text-shadow: 
     0 0 5px #ffaee1,
@@ -106,9 +108,10 @@ html, body, #root {
     width: 90%;
     height: 40%;
     top: 30%;
-    left:40%;
+    left:30%;
     color:#ffaee1;
-    font-family: "Futura", "Century Gothic", "Arial", sans-serif;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight:600;
     font-size:20px;
     text-shadow: 
     0 0 5px #ffaee1,
@@ -120,12 +123,28 @@ html, body, #root {
     width: 90%;
     height: 40%;
     top: 35%;
-    left:47%;
+    left:30%;
     color:#ffaee1;
-    font-family: "Futura", "Century Gothic", "Arial", sans-serif;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight:600;
     font-size:20px;
     text-shadow: 
     0 0 5px #ffaee1,
+    0 0 10px #ff32b4,
+    0 0 20px #ffaee1;
+}
+.status{
+    position:absolute;
+    width: 90%;
+    height: 40%;
+    top: 45%;
+    left:15%;
+    color:#ff0000;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight:600;
+    font-size:20px;
+    text-shadow: 
+    0 0 5px #bf0e0e,
     0 0 10px #ff32b4,
     0 0 20px #ffaee1;
 }

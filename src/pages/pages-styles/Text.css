@@ -1,7 +1,11 @@
 .chat-container {
+  position: relative;
   width:100%;
   margin: 0 auto;
   z-index: 1;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight:600;
+  overflow: hidden;
 }
 .profile-pic{
     width: 60px;
@@ -18,17 +22,20 @@
     position: absolute;
     background-color: #c267f3;
     z-index: 1;
+    color: white;
 }
 .contact {
   text-align: center;
   font-size: 28px;
   z-index: 1;
+  color: white;
 }
 
 .chat-log {
   border-radius: 15px;
-  height: 400px;
+  height: 600px;
   padding: 10px;
+  font-size:20px;
   overflow-y: scroll;
   margin-bottom: 10px;
   background-color: #f9f9f914;
@@ -48,7 +55,9 @@
   border-radius: 15px;
   background-color: #f9f9f923;
   z-index: 1;
-  margin-left: 5px
+  margin-left: 5px;
+  font-size: 24px;;
+  color: white;
 }
 
 .chat-button {
