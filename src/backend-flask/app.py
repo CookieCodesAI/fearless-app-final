@@ -5,18 +5,6 @@ from pydub import AudioSegment
 from voice import get_labels, preprocess_live_audio, decode_chunk
 import numpy as np
 
-app = Flask(__name__)
-cors = CORS(app, resources={r"/*": {"origins": "*"}})
-
-# ----------------------------
-# Config / Globals
-# ----------------------------
-from flask import Flask, jsonify, request
-from flask_cors import CORS
-import tensorflow as tf
-from pydub import AudioSegment
-from voice import get_labels, preprocess_live_audio, decode_chunk
-import numpy as np
 
 app = Flask(__name__)
 CORS(app)
