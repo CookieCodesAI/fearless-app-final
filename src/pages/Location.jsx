@@ -125,35 +125,35 @@ function Routing({ start, end }) {
     return null;
 }
 
-function useCurrentLocation() {
+function useCurrentLocation(enabled) {
     const [location, setLocation] = useState(null);
-    
 
     useEffect(() => {
-        if(!navigator.geolocation) {
+        if (!enabled) return;
+
+        if (!navigator.geolocation) {
             alert("Geolocation not supported by this browser.");
             return;
         }
+
         navigator.geolocation.getCurrentPosition(
             (pos) => setLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
             (err) => console.error("Geolocation error:", err),
-            { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+            { enableHighAccuracy: true }
         );
-        
+
         const watchID = navigator.geolocation.watchPosition(
             (pos) => {
                 if (pos.coords.accuracy <= 1000) {
                     setLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude });
-                } else {
-                    console.log("Ignoring inaccurate position:", pos.coords.accuracy);
                 }
             },
             (err) => console.error(err),
-            { enableHighAccuracy: true, maximumAge: 0, timeout:10000 }
+            { enableHighAccuracy: true }
         );
 
         return () => navigator.geolocation.clearWatch(watchID);
-    }, []);
+    }, [enabled]);
 
     return location;
 }
@@ -280,12 +280,12 @@ async function fetchSafeLocations(lat, lng, radius = 3000) {
 
 
 export default function Location() {
-    const userLocation = useCurrentLocation();
+    const [locationEnabled, setLocationEnabled] = useState(false);
+    const userLocation = useCurrentLocation(locationEnabled);
     const [safeLocations, setSafeLocations] = useState([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     const [selectedDestination, setSelectedDestination] = useState(null);
-
     useEffect(() => {
         console.log("User location updated:", userLocation);
     }, [userLocation]);
@@ -306,9 +306,27 @@ export default function Location() {
                 console.error("Error fetching safe locations:", err);
             });
     }, [userLocation]);
+    if (!locationEnabled) {
+        return (
+            <div style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <button
+                    onClick={() => setLocationEnabled(true)}
+                    style={{
+                        padding: '15px 25px',
+                        fontSize: '18px',
+                        borderRadius: '10px',
+                        backgroundColor: '#996bff',
+                        color: 'white',
+                        border: 'none'
+                    }}
+                >
+                    Tap to Enable Location
+                </button>
+            </div>
+        );
+    }
 
     if (!userLocation) return <p style={{ padding: 12 }}>Loading your location...</p>;
-
 
     return (
         <div style={{ height: '100vh', width: '100%' }}>

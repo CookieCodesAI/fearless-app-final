@@ -7,8 +7,8 @@ export default function LiveStream(){
     const navigate = useNavigate();
     return (
         <div className = "stream-container">
-            <img src ="/public/live-stream.gif" alt = "likes" className='likes'></img>
-            <WebCam className = 'webcam' audio={false} width={500} height={700} videoConstraints={{
+            <img src ="/live-stream.gif" alt = "likes" className='likes'></img>
+            <WebCam className = 'webcam' audio={false} width={500} height={700} mirrored={false} videoConstraints={{
                 width: 520,
                 height: 430,
                 facingMode: "user"
