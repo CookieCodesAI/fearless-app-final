@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 import tensorflow as tf
 from pydub import AudioSegment
-from voice import get_labels, preprocess_live_audio, decode_chunk
+from voice import get_labels, preprocess_live_audio
 import numpy as np
 
 
@@ -11,7 +11,7 @@ CORS(app)
 
 SAMPLE_RATE = 16000
 labels = get_labels()
-key = ["down", "down", "down", "down"]
+key = ["down", "up", "go", "left"]
 
 model = tf.keras.models.load_model("./../../models/speech_cnn.keras")
 
@@ -62,22 +62,15 @@ def process_audio_chunk(audio_chunk):
         "status": "NO SOS DETECTED"
     }
 
-
-@app.route("/predict", methods=['POST', 'OPTIONS'])
+@app.route("/predict", methods=["POST"])
 def predict():
-    if request.method == 'OPTIONS':
-        response = app.make_response("")
-        response.headers["Access-Control-Allow-Origin"] = "*"
-        response.headers["Access-Control-Allow-Headers"] = "Content-Type"
-        response.headers["Access-Control-Allow-Methods"] = "POST, OPTIONS"
-        return response
+    raw_data = request.data
 
-    chunk = request.files.get("chunk")
-    if not chunk:
-        return jsonify({"error": "No chunk"}), 400
+    if not raw_data:
+        return jsonify({"error": "No data"}), 400
 
-    chunk_bytes = chunk.read()
-    audio_chunk = decode_chunk(chunk_bytes)
+    # Convert bytes → numpy
+    audio_chunk = np.frombuffer(raw_data, dtype=np.int16).astype(np.float32) / 32768.0
 
     result = process_audio_chunk(audio_chunk)
     return jsonify(result)

@@ -1,39 +1,7 @@
 import tensorflow as tf
 import numpy as np
 import soundfile as sf
-from io import BytesIO
-from pydub import AudioSegment
 import subprocess
-
-
-def decode_chunk(chunk_bytes):
-
-    command = [
-        "ffmpeg",
-        "-i", "pipe:0",
-        "-f", "s16le",  
-        "-acodec", "pcm_s16le",
-        "-ac", "1",       
-        "-ar", "16000",     
-        "pipe:1"             
-    ]
-
-    try:
-
-        proc = subprocess.run(
-            command,
-            input=chunk_bytes,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            check=True
-        )
-    except subprocess.CalledProcessError as e:
-        print("FFMPEG error:", e.stderr.decode())
-        return np.array([], dtype=np.float32)
-
-    audio = np.frombuffer(proc.stdout, dtype=np.int16).astype(np.float32) / 32768.0
-    return audio
-
 
 def get_labels():
     with open("label.labels.txt", "r") as f:
