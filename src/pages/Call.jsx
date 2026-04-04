@@ -7,9 +7,6 @@ export default function Call(){
     const [prediction, setPrediction] = useState("");
     const [confidence, setConfidence] = useState(0);
     const [recording, setRecording] = useState(false);
-    const [audioContext, setAudioContext] = useState(null);
-    const [processor, setProcessor] = useState(null);
-    const [source, setSource] = useState(null);
     const [status, setStatus] = useState("");
     const audioBufferRef = useRef([]);
     const recordingRef = useRef(false);
@@ -17,9 +14,6 @@ export default function Call(){
     const processorRef = useRef(null);
     const sourceRef = useRef(null);
     const streamRef = useRef(null);
-    const [recorder, setRecorder] = useState(null);
-    const [stream, setStream] = useState(null);
-    let lastSendTime = 0;
     const navigate = useNavigate();
 
     const sending = useRef(false);
@@ -119,13 +113,10 @@ export default function Call(){
                     );
 
                     sendPCM(chunk);
-
-                    // overlap (important for accuracy)
                     audioBufferRef.current = audioBufferRef.current.slice(8000);
                 }
             };
 
-            // save refs
             streamRef.current = stream;
             audioContextRef.current = audioContext;
             processorRef.current = processor;
@@ -134,7 +125,7 @@ export default function Call(){
             recordingRef.current = true;
             setRecording(true);
 
-            console.log("🎤 Recording started");
+            console.log("Recording started");
 
         } catch (err) {
             console.error("Mic error:", err);
@@ -164,7 +155,7 @@ export default function Call(){
             audioBufferRef.current = [];
 
             setRecording(false);
-            console.log("🛑 FULL STOP");
+            console.log("FULL STOP");
 
         } catch (err) {
             console.error("Stop error:", err);

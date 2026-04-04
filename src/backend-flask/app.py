@@ -13,7 +13,11 @@ SAMPLE_RATE = 16000
 labels = get_labels()
 key = ["down", "up", "go", "left"]
 
-model = tf.keras.models.load_model("./../../models/speech_cnn.keras")
+#model = tf.keras.models.load_model("./../../models/speech_cnn.keras")
+interpreter = tf.lite.Interpreter(model_path = "./../../models/model.tflite")
+interpreter.allocate_tensors()
+input_details = interpreter.get_input_details()
+output_details = interpreter.get_output_details()
 
 audio = AudioSegment.from_file("../../public/Down4.m4a", format="m4a")
 audio = audio.set_channels(1).set_frame_rate(SAMPLE_RATE)
@@ -23,6 +27,23 @@ audio_buffer = np.array([], dtype=np.float32)
 curr = 0
 count = 0
 
+def predict_tflite(spectrogram):
+    if hasattr(spectrogram, "numpy"):
+        spectrogram = spectrogram.numpy()
+    expected_frames = input_details[0]['shape'][1]
+    current_frames = spectrogram.shape[1]
+    if current_frames < expected_frames:
+        pad_width = expected_frames - current_frames
+        spectrogram = np.pad(
+            spectrogram, 
+        ((0,0), (0,pad_width),(0,0),(0,0)),
+        mode = "constant",
+        constant_values = 0
+        )
+    interpreter.set_tensor(input_details[0]["index"], spectrogram.astype(np.float32))
+    interpreter.invoke()
+    logits = interpreter.get_tensor(output_details[0]["index"])
+    return logits
 
 def process_audio_chunk(audio_chunk):
     global audio_buffer, curr
@@ -40,10 +61,10 @@ def process_audio_chunk(audio_chunk):
     audio_buffer = audio_buffer[HOP:]
 
     spectrogram = preprocess_live_audio(window)
-    logits = model.predict(spectrogram, verbose=0)
-    pred_id = tf.argmax(logits, axis=-1).numpy()[0]
+    logits = predict_tflite(spectrogram)
+    pred_id = int(np.argmax(logits, axis=-1)[0])
     prediction = labels[pred_id]
-    probs = tf.nn.softmax(logits)
+    probs = tf.nn.softmax(logits).numpy()
     confidence = float(probs[0, pred_id])
 
     if labels[pred_id] == key[curr]:
@@ -65,13 +86,9 @@ def process_audio_chunk(audio_chunk):
 @app.route("/predict", methods=["POST"])
 def predict():
     raw_data = request.data
-
     if not raw_data:
         return jsonify({"error": "No data"}), 400
-
-    # Convert bytes → numpy
     audio_chunk = np.frombuffer(raw_data, dtype=np.int16).astype(np.float32) / 32768.0
-
     result = process_audio_chunk(audio_chunk)
     return jsonify(result)
 
@@ -89,8 +106,8 @@ def test_file():
         audio_buffer = audio_buffer[HOP:]
 
         spectrogram = preprocess_live_audio(window)
-        logits = model.predict(spectrogram, verbose=0)
-        pred_id = tf.argmax(logits, axis=-1).numpy()[0]
+        logits = predict_tflite(spectrogram)
+        pred_id = int(np.argmax(logits, axis=-1).numpy()[0])
         prediction = labels[pred_id]
         probs = tf.nn.softmax(logits)
         confidence = float(probs[0, pred_id])
