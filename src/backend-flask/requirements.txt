@@ -1,6 +1,6 @@
 flask==3.1.3
 flask-cors==6.0.2
-numpy==1.26.0
+numpy==1.25.2
 soundfile
 tflite-runtime==2.12.0
 gunicorn
