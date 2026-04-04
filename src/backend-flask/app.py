@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-import tensorflow as tf
+import tflite_runtime.interpreter as tflite
 from pydub import AudioSegment
 from voice import get_labels, preprocess_live_audio
 import numpy as np
@@ -14,7 +14,7 @@ labels = get_labels()
 key = ["down", "up", "go", "left"]
 
 #model = tf.keras.models.load_model("./../../models/speech_cnn.keras")
-interpreter = tf.lite.Interpreter(model_path = "./../../models/model.tflite")
+interpreter = tflite.Interpreter(model_path = "./../../models/model.tflite")
 interpreter.allocate_tensors()
 input_details = interpreter.get_input_details()
 output_details = interpreter.get_output_details()
@@ -45,6 +45,10 @@ def predict_tflite(spectrogram):
     logits = interpreter.get_tensor(output_details[0]["index"])
     return logits
 
+def softmax(logits):
+    e = np.exp(logits - np.max(logits))
+    return e / e.sum(axis=-1, keepdims=True)
+
 def process_audio_chunk(audio_chunk):
     global audio_buffer, curr
 
@@ -64,7 +68,7 @@ def process_audio_chunk(audio_chunk):
     logits = predict_tflite(spectrogram)
     pred_id = int(np.argmax(logits, axis=-1)[0])
     prediction = labels[pred_id]
-    probs = tf.nn.softmax(logits).numpy()
+    probs = softmax(logits).numpy()
     confidence = float(probs[0, pred_id])
 
     if labels[pred_id] == key[curr]:
@@ -109,7 +113,7 @@ def test_file():
         logits = predict_tflite(spectrogram)
         pred_id = int(np.argmax(logits, axis=-1).numpy()[0])
         prediction = labels[pred_id]
-        probs = tf.nn.softmax(logits)
+        probs = softmax(logits)
         confidence = float(probs[0, pred_id])
 
         status = "NO SOS DETECTED"
