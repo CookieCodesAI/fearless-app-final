@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-import tflite_runtime.interpreter as tflite
+import tensorflow as tf
 from pydub import AudioSegment
 from voice import get_labels, preprocess_live_audio
 import numpy as np
@@ -14,7 +14,7 @@ labels = get_labels()
 key = ["down", "up", "go", "left"]
 
 #model = tf.keras.models.load_model("./../../models/speech_cnn.keras")
-interpreter = tflite.Interpreter(model_path = "./../../models/model.tflite")
+interpreter = tf.lite.Interpreter(model_path = "./../../models/model.tflite")
 interpreter.allocate_tensors()
 input_details = interpreter.get_input_details()
 output_details = interpreter.get_output_details()
@@ -68,7 +68,7 @@ def process_audio_chunk(audio_chunk):
     logits = predict_tflite(spectrogram)
     pred_id = int(np.argmax(logits, axis=-1)[0])
     prediction = labels[pred_id]
-    probs = softmax(logits).numpy()
+    probs = softmax(logits)
     confidence = float(probs[0, pred_id])
 
     if labels[pred_id] == key[curr]:
