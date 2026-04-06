@@ -1,0 +1,26 @@
+.permissions-text {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-white);
+  text-align: center;
+  line-height: 1.7;
+  padding: 0 10px;
+}
+
+.permissions-text strong {
+  font-weight: 800;
+  color: var(--text-white);
+}
+
+.permissions-link {
+  text-decoration: underline;
+  cursor: pointer;
+  color: var(--neon-pink);
+  font-weight: 700;
+  transition: opacity 0.15s ease;
+}
+
+.permissions-link:hover {
+  opacity: 0.8;
+}

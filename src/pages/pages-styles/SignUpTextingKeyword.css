@@ -1,0 +1,9 @@
+.keyword-hint {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  line-height: 1.6;
+  padding: 0 10px;
+}
