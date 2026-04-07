@@ -3,6 +3,7 @@ flask-cors==6.0.2
 numpy==1.25.2
 soundfile
 tflite-runtime==2.14.0
+tensorflow==2.14.0
 setuptools>=68.0.0
 wheel>=0.40.0
 gunicorn
