@@ -12,7 +12,6 @@ SAMPLE_RATE = 16000
 labels = get_labels()
 key = ["down", "up", "go", "left"]
 
-#model = tf.keras.models.load_model("./../../models/speech_cnn.keras")
 interpreter = tflite.Interpreter(model_path="models/model.tflite")
 interpreter.allocate_tensors()
 input_details = interpreter.get_input_details()
@@ -97,7 +96,6 @@ def test_file():
     global curr, count
     curr = 0
     count = 0
-    audio_buffer = samples.copy() 
     results = []
     HOP = 8000
 

@@ -1,23 +1,10 @@
 import tensorflow as tf
 import numpy as np
-import soundfile as sf
-import subprocess
 
 def get_labels():
     with open("label.labels.txt", "r") as f:
         labels = [line.strip() for line in f]
     return labels
-
-'''def record_audio(seconds=2):
-    print("Listening...")
-    audio = sd.rec(
-        int(seconds * SAMPLE_RATE),
-        samplerate=SAMPLE_RATE,
-        channels=1,
-        dtype="float32"
-    )
-    sd.wait()
-    return audio.flatten()'''
 
 def preprocess_live_audio(audio):
 
@@ -44,34 +31,3 @@ def preprocess_live_audio(audio):
     spectrogram = tf.expand_dims(spectrogram, 0)
 
     return spectrogram
-
-model = tf.keras.models.load_model("./../../models/speech_cnn.keras")
-
-labels = get_labels()
-
-SAMPLE_RATE = 16000
-
-key = ["go", "down", "off", "right"]
-curr = 0
-status = False
-count = 0
-'''while not status:
-    audio = record_audio()
-    spectrogram = preprocess_live_audio(audio)
-    logits = model.predict(spectrogram)
-    pred_id = tf.argmax(logits, axis=-1).numpy()[0]
-    if labels[pred_id] == key[curr]:
-        count=count+1
-        curr+=1
-    print("Predicted:", labels[pred_id])
-    probs = tf.nn.softmax(logits)
-    confidence = probs[0, pred_id]
-    print(f"Confidence: {confidence:.2f}")
-    if (count==4):
-        status = True
-    else:
-        print("NO SOS DETECTED")
-    time.sleep(0.5)
-print("SOS DETECTED SENDING HELP")
-
-'''
