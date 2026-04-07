@@ -1,7 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-import tensorflow as tf
-from pydub import AudioSegment
+import tflite_runtime.interpreter as tflite
 from voice import get_labels, preprocess_live_audio
 import numpy as np
 
@@ -14,14 +13,11 @@ labels = get_labels()
 key = ["down", "up", "go", "left"]
 
 #model = tf.keras.models.load_model("./../../models/speech_cnn.keras")
-interpreter = tf.lite.Interpreter(model_path = "./../../models/model.tflite")
+interpreter = tflite.Interpreter(model_path="models/model.tflite")
 interpreter.allocate_tensors()
 input_details = interpreter.get_input_details()
 output_details = interpreter.get_output_details()
 
-audio = AudioSegment.from_file("../../public/Down4.m4a", format="m4a")
-audio = audio.set_channels(1).set_frame_rate(SAMPLE_RATE)
-samples = np.array(audio.get_array_of_samples()).astype(np.float32) / 32768.0 
 
 audio_buffer = np.array([], dtype=np.float32)
 curr = 0
